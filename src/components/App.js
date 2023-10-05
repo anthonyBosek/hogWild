@@ -4,37 +4,37 @@ import UserOptions from "./UserOptions";
 import AllTiles from "./AllTiles";
 
 import hogs from "../porkers_data";
+import Form from "./Form";
 
 const App = () => {
   const [hogArr, setHogArr] = useState(hogs);
 
   const handleSort = (e) => {
-    const sortType = e.target.value;
-    let sortedArr = [...hogArr];
-
-    if (sortType === "name") {
-      sortedArr.sort((a, b) => a.name.localeCompare(b.name));
-    } else if (sortType === "weight") {
-      sortedArr.sort((a, b) => a.weight - b.weight);
-    }
-
-    setHogArr(sortedArr);
+    const sort = e.target.value;
+    const option = {
+      all: hogs,
+      name: [...hogs].sort((a, b) => a.name.localeCompare(b.name)),
+      weight: [...hogs].sort((a, b) => a.weight - b.weight),
+    };
+    setHogArr(option[sort]);
   };
 
   const handleFilter = (e) => {
-    const filterType = e.target.value;
-    let filteredArr = [...hogs];
-    if (filterType === "true") {
-      filteredArr = filteredArr.filter((hog) => hog.greased);
-    } else if (filterType === "false") {
-      filteredArr = filteredArr.filter((hog) => !hog.greased);
-    }
-    setHogArr(filteredArr);
+    const type = e.target.value;
+    const option = {
+      all: hogs,
+      grease: hogs.filter((hog) => hog.greased),
+      noGrease: hogs.filter((hog) => !hog.greased),
+    };
+    setHogArr(option[type]);
   };
+
+  const onSubmit = (obj) => setHogArr([...hogArr, obj]);
 
   return (
     <div className="App">
       <Nav />
+      <Form onSubmit={onSubmit} />
       <UserOptions handleSort={handleSort} handleFilter={handleFilter} />
       <AllTiles hogArr={hogArr} />
     </div>

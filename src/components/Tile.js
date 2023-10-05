@@ -9,23 +9,26 @@ const Tile = ({ hog }) => {
     "highest medal achieved": medal,
   } = hog;
 
-  const [hidden, setHidden] = useState(false);
-  const [isGone, setIsGone] = useState(false);
+  const [showDetails, setShowDetails] = useState(false);
+  const [isHidden, setIsHidden] = useState(false);
 
-  const handleClick = () => setHidden(!hidden);
+  const handleShowExtra = () => setShowDetails((prev) => !prev);
 
-  const handleGone = () => setIsGone(!isGone);
+  const handleHidTile = () => setIsHidden((prev) => !prev);
 
   return (
     <>
-      {!isGone ? (
+      {!isHidden ? (
         <div className="ui four wide column">
-          <div className="ui card maxPigTile" onClick={handleClick}>
+          <button className="hide-btn" onClick={handleHidTile}>
+            X
+          </button>
+          <div className="ui card maxPigTile" onClick={handleShowExtra}>
             <div className="image">
               <img src={hog.image} alt={name} />
             </div>
             <h3 className="header">{name}</h3>
-            {hidden && (
+            {showDetails && (
               <>
                 <div className="content">
                   <div className="meta">
@@ -46,9 +49,6 @@ const Tile = ({ hog }) => {
                 </div>
               </>
             )}
-          </div>
-          <div className="extra content">
-            <button onClick={handleGone}>Hide</button>
           </div>
         </div>
       ) : null}

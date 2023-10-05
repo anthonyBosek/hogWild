@@ -144,8 +144,29 @@ ul {
   align-items: center;
   margin: 15px;
 }
+.options input {
+  margin: 0 10px;
+}
 .options select {
   margin: 0 10px;
+}
+.hide-btn {
+  position: absolute;
+  z-index: 1;
+  top: 40px;
+  right: 30px;
+  padding: 5px 8px;
+  border: 1px solid #f5a9bc;
+  border-radius: 50%;
+  background: #fff;
+  opacity: 0.6;
+  font-weight: bold;
+}
+.hide-btn:hover {
+  opacity: 0.8;
+  cursor: pointer;
+  transform: scale(1.1);
+  box-shadow: 2px 2px 4px #111;
 }
 /* ------ */
 
